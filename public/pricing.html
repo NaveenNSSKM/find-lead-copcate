@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - FindLead.ai | Sales Intelligence Platform</title>
+    <meta name="description"
+        content="Choose the perfect plan for your business. FindLead.ai offers flexible pricing for sales teams, from free tiers to enterprise managed services. Compare plans now.">
+    <meta name="keywords"
+        content="FindLead.ai pricing, sales intelligence, email outreach, lead generation, ABM leads, sales tools">
+    <meta property="og:title" content="Pricing - FindLead.ai | Sales Intelligence Platform">
+    <meta property="og:description"
+        content="Choose the perfect plan for your business. FindLead.ai offers flexible pricing for sales teams, from free tiers to enterprise managed services.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://findlead.ai/pricing.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Clash Display', sans-serif;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'accent-primary': '#EFE34B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-[#EFE34B]">
+
+    <!-- Navbar -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 w-full z-[100] h-20 flex items-center transition-all duration-300 bg-transparent">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12 w-full flex justify-between items-center">
+
+            <!-- Left Side -->
+            <div class="flex items-center gap-12">
+                <!-- Logo -->
+                <div class="flex items-center gap-4">
+                    <a href="/" class="flex items-center">
+                        <img src="/images/logo.png" alt="FindLead.ai" class="h-6 w-auto object-contain">
+                    </a>
+
+                    <!-- Mobile Hamburger -->
+                    <button onclick="toggleMenu()"
+                        class="lg:hidden flex flex-col justify-center items-center gap-[5px] w-8 h-8 p-1">
+                        <span class="block w-6 h-[2px] bg-[#00358E] rounded-full"></span>
+                        <span class="block w-6 h-[2px] bg-[#00358E] rounded-full"></span>
+                        <span class="block w-6 h-[2px] bg-[#00358E] rounded-full"></span>
+                    </button>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex gap-8 items-center font-semibold text-sm text-[#121212]">
+                    <a href="/" class="hover:text-gray-600 transition-colors">Home</a>
+                    <a href="#" class="hover:text-gray-600 transition-colors">Product</a>
+                    <a href="/pricing.html" class="hover:text-gray-600 transition-colors">Pricing</a>
+                    <a href="#" class="hover:text-gray-600 transition-colors">Blog</a>
+                    <a href="#" class="hover:text-gray-600 transition-colors">Contact</a>
+                </div>
+            </div>
+
+            <!-- Right -->
+            <div class="flex items-center">
+                <a href="#"
+                    class="bg-[#EFE34B] text-black px-5 py-2 md:px-7 md:py-3 rounded-lg font-bold text-sm hover:bg-yellow-400 transition-colors shadow-sm whitespace-nowrap">
+                    Sign up now
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="hidden fixed inset-0 z-[200] bg-white text-[#0B1B32] lg:hidden animate-in fade-in slide-in-from-right duration-200">
+        <div class="p-6 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-8">
+                <a href="/" onclick="toggleMenu()">
+                    <img src="/images/logo.png" alt="FindLead.ai" class="h-7 w-auto object-contain">
+                </a>
+                <button onclick="toggleMenu()" class="p-2 text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-col gap-6 text-xl font-bold px-2">
+                <div class="border-b border-gray-100 pb-4"><a href="/" onclick="toggleMenu()">Home</a></div>
+                <div class="border-b border-gray-100 pb-4">Product</div>
+                <div class="border-b border-gray-100 pb-4">Pricing</div>
+                <div class="border-b border-gray-100 pb-4">Blog</div>
+                <div class="pb-4">Contact</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- PRICING SECTION -->
+    <section class="pt-32 pb-24 px-6 relative bg-[#EFE34B]">
+        <div class="max-w-[1440px] mx-auto">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-heading font-bold mb-4 tracking-tight text-black">
+                    Supercharge Your Sales Success<br />with Findlead Pricing
+                </h1>
+                <p class="text-lg text-black/80 font-medium">
+                    Unlock Revenue Potential with Pricing Plans Tailored to Your Success
+                </p>
+
+                <!-- Toggle -->
+                <div class="flex items-center justify-center gap-4 mt-8" id="toggle-container">
+                    <span class="text-sm font-bold text-black" id="label-monthly">Monthly</span>
+                    <button onclick="togglePricing()"
+                        class="w-16 h-8 bg-white rounded-full p-1 relative transition-colors focus:outline-none">
+                        <div id="toggle-ball"
+                            class="w-6 h-6 bg-[#EFE34B] rounded-full shadow-sm transition-transform duration-300 translate-x-8">
+                        </div>
+                    </button>
+                    <span class="text-sm font-bold flex items-center gap-2 text-black" id="label-annual">
+                        Annual
+                        <span class="bg-white text-xs px-2 py-0.5 rounded-full border border-black/5 shadow-sm">Save
+                            40%</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 4 Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 items-center mb-16 px-4 md:px-0">
+
+                <!-- Card 1: Free -->
+                <div
+                    class="bg-white rounded-[2rem] p-8 flex flex-col justify-between h-[650px] relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-blue-100 rounded-bl-full z-0"></div>
+                    <div
+                        class="absolute top-8 right-8 z-10 w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm">
+                        <div class="w-8 h-8 rounded-full border-[3px] border-blue-200"></div>
+                    </div>
+
+                    <div class="relative z-10">
+                        <h3 class="text-3xl font-heading font-bold mb-2">Free</h3>
+                        <p class="text-xs font-semibold text-gray-500 mb-6 max-w-[180px]">Scale quickly using easy to
+                            use email and automation</p>
+
+                        <div class="mb-2">
+                            <span class="text-5xl font-bold tracking-tight text-gray-300">$0</span>
+                            <span class="text-2xl font-medium text-gray-300 ml-1">/ month</span>
+                        </div>
+                        <p class="text-xs font-medium text-gray-400 mb-8">Free forever</p>
+
+                        <div class="h-[1px] bg-gray-100 w-full mb-8"></div>
+
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Prospecting bulk show (1,000
+                                    contacts)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">CRM Integrations</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Advanced team management</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Contact Sales</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Multiple Users</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button
+                        class="w-full py-3 rounded-lg border border-gray-200 text-gray-400 font-medium hover:text-black hover:border-black transition-colors mt-auto">
+                        Request a demo
+                    </button>
+                </div>
+
+                <!-- Card 2: Basic -->
+                <div
+                    class="bg-white rounded-[2rem] p-8 flex flex-col justify-between h-[650px] relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-purple-400 rounded-bl-full z-0"></div>
+                    <div class="absolute top-5 right-5 z-10">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                        </svg>
+                    </div>
+
+                    <div class="relative z-10">
+                        <h3 class="text-3xl font-heading font-bold mb-2">Basic</h3>
+                        <p class="text-xs font-semibold text-gray-500 mb-6 max-w-[180px]">Everything you need to boost
+                            performance and revenue</p>
+
+                        <div class="mb-2">
+                            <span class="text-5xl font-bold tracking-tight text-gray-800">$299</span>
+                            <span class="text-2xl font-medium text-gray-300 ml-1">/ month</span>
+                        </div>
+                        <p class="text-xs font-medium text-gray-400 mb-8">Per User, Per Month, Billed annually</p>
+
+                        <div class="h-[1px] bg-gray-100 w-full mb-8"></div>
+
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">10000 Credits Annually</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">ABM Leads</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Single User Account</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Verified Emails and Phone Numbers</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Mobile Direct Dials</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button
+                        class="w-full py-3 rounded-lg border border-gray-200 text-gray-400 font-medium hover:text-black hover:border-black transition-colors mt-auto">
+                        Request a demo
+                    </button>
+                </div>
+
+                <!-- Card 3: Professional (Highlighted) -->
+                <div
+                    class="bg-[#2B2B2B] text-white rounded-[2rem] p-8 flex flex-col justify-between h-[800px] relative shadow-2xl transform lg:-translate-y-6 z-20 overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-full h-[220px] bg-gradient-to-br from-[#6A5ACD] to-[#8A2BE2] opacity-100 z-0 mask-image-bottom">
+                    </div>
+                    <div class="absolute top-4 right-4 z-10 opacity-30">
+                        <svg width="100" height="100" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" />
+                        </svg>
+                    </div>
+                    <div class="absolute top-10 right-10 z-20">
+                        <svg width="50" height="50" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1">
+                            <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" />
+                        </svg>
+                    </div>
+
+                    <div class="relative z-10">
+                        <h3 class="text-3xl font-heading font-bold mb-2 text-[#EFE34B]">Professional</h3>
+                        <p class="text-xs font-medium text-gray-200 mb-6 max-w-[200px]">Perfect for small teams with
+                            simple workflows</p>
+
+                        <div class="mb-2">
+                            <span class="text-6xl font-bold tracking-tight">$499</span>
+                            <span class="text-2xl font-medium text-gray-400 ml-1">/ month</span>
+                        </div>
+                        <p class="text-xs font-medium text-gray-400 mb-6">Per User, Per Month<br />Billed annually</p>
+
+                        <!-- Dropdown Input -->
+                        <div class="relative mb-8">
+                            <div
+                                class="w-full bg-white text-black px-4 py-3 rounded-lg flex justify-between items-center text-sm font-bold cursor-pointer">
+                                <span>20,000 credits <span class="text-gray-400 font-normal">1 user</span></span>
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M1 1L6 6L11 1" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-[#444] flex items-center justify-center shrink-0 border border-gray-600">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-300">20000 Credits Annually</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-[#444] flex items-center justify-center shrink-0 border border-gray-600">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-300">ABM Leads</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-[#444] flex items-center justify-center shrink-0 border border-gray-600">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-300">Data Enrichment</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-[#444] flex items-center justify-center shrink-0 border border-gray-600">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-300">Advanced Search Filters</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-[#444] flex items-center justify-center shrink-0 border border-gray-600">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-300">Technographics</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-[#444] flex items-center justify-center shrink-0 border border-gray-600">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-300">Prospecting bulk show</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-[#444] flex items-center justify-center shrink-0 border border-gray-600">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-300">Extension bulk show</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button
+                        class="w-full py-3 rounded-lg bg-[#0066FF] text-white font-bold hover:bg-blue-600 transition-colors mt-8 shadow-lg shadow-blue-900/50">
+                        Request a demo
+                    </button>
+                </div>
+
+                <!-- Card 4: Managed Service -->
+                <div class="bg-white rounded-[2rem] p-8 flex flex-col justify-between h-[650px] relative">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl font-heading font-bold mb-4 leading-tight">Managed<br />Service</h3>
+                        <p class="text-xs font-semibold text-gray-500 mb-6 max-w-[200px]">Email & LinkedIn outreach set
+                            and managed for you.</p>
+
+                        <div class="mb-2">
+                            <p class="text-sm font-bold mb-1">Starting at</p>
+                            <span class="text-5xl font-bold tracking-tight text-black">$999</span>
+                            <span class="text-2xl font-medium text-gray-300 ml-1">/ month</span>
+                        </div>
+
+                        <div class="mt-8 mb-6 space-y-4">
+                            <button
+                                class="w-full py-3 rounded-lg bg-[#007AFF] text-white font-bold hover:bg-blue-600 transition-colors shadow-sm">
+                                Contact Sales
+                            </button>
+                            <div class="text-center">
+                                <a href="#"
+                                    class="text-sm font-bold flex items-center justify-center gap-1 hover:underline">
+                                    Learn More
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="h-[1px] bg-gray-100 w-full mb-8"></div>
+
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">20000 Credits Annually</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">ABM Leads</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Data Enrichment</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Advanced Search Filters</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 4L3.5 6.5L9 1" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">Technographics</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Compare Button -->
+            <div class="text-center pb-12">
+                <button onclick="toggleComparison(true)"
+                    class="bg-[#007AFF] text-white px-8 py-3 rounded-lg font-bold flex items-center gap-2 mx-auto hover:bg-blue-600 transition-colors shadow-lg">
+                    Compare Plan
+                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 1L6 6L11 1" />
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Comparison Modal/Table -->
+    <div id="comparison-modal"
+        class="hidden fixed inset-0 z-50 bg-black/60 flex justify-center items-start overflow-y-auto pt-24 pb-12"
+        onclick="toggleComparison(false)">
+        <div class="bg-white rounded-xl shadow-2xl max-w-6xl w-full mx-6 p-8 relative"
+            onclick="event.stopPropagation()">
+            <button onclick="toggleComparison(false)"
+                class="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <h2 class="text-4xl font-heading font-bold text-center mb-12">Compare Plans</h2>
+
+            <!-- Table Header -->
+            <div
+                class="grid grid-cols-5 gap-4 border-b border-[#EFE34B] pb-6 mb-8 text-center items-end sticky top-0 bg-white z-10 pt-4">
+                <div class="text-left font-bold text-lg">Features</div>
+                <div>
+                    <h4 class="font-bold text-xl mb-1">Free</h4>
+                    <p class="text-gray-500 font-medium">$0</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xl mb-1">Basic</h4>
+                    <p class="text-gray-500 font-medium">$299</p>
+                </div>
+                <div class="bg-[#FCF9CB] rounded-t-lg pt-4 -mt-4 pb-2 border-b-2 border-[#EFE34B]">
+                    <h4 class="font-bold text-xl mb-1 text-black">Professional</h4>
+                    <p class="text-gray-800 font-medium">$499</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xl mb-1">Managed Service</h4>
+                    <p class="text-gray-500 font-medium">$999</p>
+                </div>
+            </div>
+
+            <!-- Table Content -->
+            <div class="space-y-12">
+                <!-- Limits/month -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4 pl-4 border-l-4 border-[#EFE34B]">Limits/month</h3>
+                    <div class="divide-y divide-gray-100">
+                        <div
+                            class="grid grid-cols-5 gap-4 py-4 items-center text-center hover:bg-gray-50 transition-colors">
+                            <div class="text-left pl-4 font-medium text-gray-600">AI Words</div>
+                            <div class="text-gray-900 font-medium">10,000</div>
+                            <div class="text-gray-900 font-medium">100,000</div>
+                            <div class="bg-[#FCF9CB]/30 -mx-2 rounded text-gray-900 font-medium">Unlimited</div>
+                            <div class="text-gray-900 font-medium">Unlimited</div>
+                        </div>
+                        <div
+                            class="grid grid-cols-5 gap-4 py-4 items-center text-center hover:bg-gray-50 transition-colors">
+                            <div class="text-left pl-4 font-medium text-gray-600">Article Writer</div>
+                            <div class="text-gray-900 font-medium">1</div>
+                            <div class="text-gray-900 font-medium">5</div>
+                            <div class="bg-[#FCF9CB]/30 -mx-2 rounded text-gray-900 font-medium">30</div>
+                            <div class="text-gray-900 font-medium">30</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEO -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4 pl-4 border-l-4 border-[#EFE34B]">SEO</h3>
+                    <div class="divide-y divide-gray-100">
+                        <!-- Cruise Mode -->
+                        <div
+                            class="grid grid-cols-5 gap-4 py-4 items-center text-center hover:bg-gray-50 transition-colors">
+                            <div class="text-left pl-4 font-medium text-gray-600">Cruise Mode (5 min article writer)
+                            </div>
+                            <div class="flex justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="flex justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="bg-[#FCF9CB]/30 -mx-2 rounded flex justify-center"><svg width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="flex justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                        </div>
+
+                        <!-- SERP Analysis -->
+                        <div
+                            class="grid grid-cols-5 gap-4 py-4 items-center text-center hover:bg-gray-50 transition-colors">
+                            <div class="text-left pl-4 font-medium text-gray-600">SERP Analysis</div>
+                            <div class="flex justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="flex justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="bg-[#FCF9CB]/30 -mx-2 rounded flex justify-center"><svg width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="flex justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                        </div>
+
+                        <!-- Keyword Planner -->
+                        <div
+                            class="grid grid-cols-5 gap-4 py-4 items-center text-center hover:bg-gray-50 transition-colors">
+                            <div class="text-left pl-4 font-medium text-gray-600">Keyword Planner</div>
+                            <div class="flex justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    class="text-gray-300">
+                                    <path d="M18 6L6 18M6 6l12 12" stroke="#CBD5E1" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="flex justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="bg-[#FCF9CB]/30 -mx-2 rounded flex justify-center"><svg width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="flex justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                        </div>
+
+                        <!-- Content Optimizer -->
+                        <div
+                            class="grid grid-cols-5 gap-4 py-4 items-center text-center hover:bg-gray-50 transition-colors">
+                            <div class="text-left pl-4 font-medium text-gray-600">Content Optimizer</div>
+                            <div class="flex justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    class="text-gray-300">
+                                    <path d="M18 6L6 18M6 6l12 12" stroke="#CBD5E1" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="flex justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="bg-[#FCF9CB]/30 -mx-2 rounded flex justify-center"><svg width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="flex justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                        </div>
+
+                        <div
+                            class="grid grid-cols-5 gap-4 py-4 items-center text-center hover:bg-gray-50 transition-colors">
+                            <div class="text-left pl-4 font-medium text-gray-600">Keyword Planner</div>
+                            <div class="flex justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    class="text-gray-300">
+                                    <path d="M18 6L6 18M6 6l12 12" stroke="#CBD5E1" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="flex justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    class="text-gray-300">
+                                    <path d="M18 6L6 18M6 6l12 12" stroke="#CBD5E1" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="bg-[#FCF9CB]/30 -mx-2 rounded flex justify-center"><svg width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="flex justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    class="text-green-500">
+                                    <path d="M20 6L9 17L4 12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 text-center text-gray-500 text-sm">
+                    Full feature list available upon request.
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full bg-white border-t border-gray-100 py-6">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
+            <!-- Left Side -->
+            <div class="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-sm text-gray-500">
+                <img src="/images/logo.png" alt="FindLead.ai" class="h-6 w-auto object-contain">
+                <span>© 2025. All rights reserved.</span>
+            </div>
+            <!-- Right Side -->
+            <div class="flex items-center gap-8 text-sm text-gray-500 font-medium">
+                <a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-gray-900 transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let isAnnual = true;
+        function togglePricing() {
+            isAnnual = !isAnnual;
+            const ball = document.getElementById('toggle-ball');
+            const labelMonthly = document.getElementById('label-monthly');
+            const labelAnnual = document.getElementById('label-annual');
+
+            if (isAnnual) {
+                ball.classList.add('translate-x-8');
+                ball.classList.remove('translate-x-0');
+                labelAnnual.classList.add('text-black');
+                labelAnnual.classList.remove('text-black/50');
+                labelMonthly.classList.add('text-black/50');
+                labelMonthly.classList.remove('text-black');
+            } else {
+                ball.classList.add('translate-x-0');
+                ball.classList.remove('translate-x-8');
+                labelAnnual.classList.add('text-black/50');
+                labelAnnual.classList.remove('text-black');
+                labelMonthly.classList.add('text-black');
+                labelMonthly.classList.remove('text-black/50');
+            }
+        }
+
+        function toggleComparison(show) {
+            const modal = document.getElementById('comparison-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.add('bg-transparent');
+                navbar.classList.remove('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
+            }
+        });
+    </script>
+</body>
+
+</html>

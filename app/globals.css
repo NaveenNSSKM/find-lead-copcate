@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+:root {
+  --font-clash: 'Clash Display', sans-serif;
+  --font-open-sans: 'Open Sans', sans-serif;
+
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F8F9FB;
+  /* Very light gray for sections */
+  --color-bg-card: #FFFFFF;
+
+  --color-text-primary: #121212;
+  --color-text-secondary: #4B5563;
+  --color-accent-primary: #EFE34B;
+  /* The FindLead Neon Yellow */
+  --color-accent-hover: #DCCE3A;
+
+  --color-border-light: #E5E7EB;
+
+  /* Feature block colors */
+  --color-block-purple: #E0D4FF;
+  --color-block-cyan: #D4F5FF;
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-clash);
+  }
+
+  .shadow-soft {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .animate-infinite-scroll {
+    animation: infinite-scroll 40s linear infinite;
+  }
+
+  @keyframes infinite-scroll {
+    from {
+      transform: translateY(0);
+    }
+
+    to {
+      transform: translateY(-50%);
+    }
+  }
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-open-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-clash);
+}
+
+/* Clapping Animation */
+.cta-hover-group .animate-clap-1,
+.cta-hover-group .animate-clap-2 {
+  transform-origin: bottom left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cta-hover-group .animate-clap-3,
+.cta-hover-group .animate-clap-4 {
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cta-hover-group:hover .animate-clap-1 {
+  animation: clap-left 0.5s ease-in-out infinite alternate;
+}
+
+.cta-hover-group:hover .animate-clap-2 {
+  animation: clap-left 0.5s ease-in-out 0.1s infinite alternate;
+}
+
+.cta-hover-group:hover .animate-clap-3 {
+  animation: clap-right 0.5s ease-in-out infinite alternate;
+}
+
+.cta-hover-group:hover .animate-clap-4 {
+  animation: clap-right 0.5s ease-in-out 0.1s infinite alternate;
+}
+
+@keyframes clap-left {
+  0% {
+    transform: rotate(0deg) translateY(0);
+  }
+
+  100% {
+    transform: rotate(-15deg) translateY(-10px);
+  }
+}
+
+@keyframes clap-right {
+  0% {
+    transform: rotate(0deg) translateY(0);
+  }
+
+  100% {
+    transform: rotate(15deg) translateY(-10px);
+  }
+}
