@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "Findlead uses a Strategic AI Agent to research high-intent leads and write handcrafted drips.",
 
   icons: {
-    icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
+    icon: '/images/favicon.png',
   },
 };
 

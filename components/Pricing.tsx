@@ -14,13 +14,24 @@ export default function Pricing() {
         <>
             <section className="pt-32 pb-24 px-6 relative bg-[#EFE34B]">
                 <div className="max-w-[1440px] mx-auto ">
-                    <div className="text-center mb-16">
-                        <div className="inline-flex items-center justify-center gap-2 bg-yellow-100 border border-yellow-200 text-yellow-800 px-6 py-2 rounded-full text-sm font-bold mb-8 shadow-sm">
-                            <span>⚡</span>
-                            Limited Time: Early Adopter One-Time Pricing
+                    <div className="text-center mb-16 px-4 md:px-0">
+                        <div className="inline-flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 bg-[#FFFDF5] border border-[#E6D84B] text-[#5A3908] px-8 py-4 md:px-6 md:py-2 rounded-[1.5rem] md:rounded-full mb-8 shadow-sm max-w-full">
+                            {/* Mobile View */}
+                            <div className="flex items-center gap-2 md:hidden">
+                                <span className="text-orange-500 text-sm">⚡</span>
+                                <span className="font-bold text-base">Limited Time Offer</span>
+                            </div>
+                            <span className="md:hidden text-center text-[#5A3908]/80 font-medium text-sm">
+                                Early Adopter One-Time Pricing
+                            </span>
+
+                            {/* Desktop View */}
+                            <span className="hidden md:inline-flex items-center gap-2 font-bold text-sm">
+                                <span>⚡</span> Limited Time: Early Adopter One-Time Pricing
+                            </span>
                         </div>
 
-                        <h1 className="text-4xl md:text-7xl font-heading font-bold mb-6 tracking-tight text-black">
+                        <h1 className="text-4xl md:text-7xl font-heading font-bold mb-6 tracking-tight text-black leading-[1.1]">
                             Own Your Sales Pipeline. Forever.
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-600 font-medium max-w-4xl mx-auto leading-relaxed">
