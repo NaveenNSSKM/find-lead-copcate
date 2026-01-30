@@ -33,7 +33,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-12">
                         {/* Logo + Mobile Toggle */}
                         <div className="flex items-center gap-4">
-                            <Link href="#" className="flex items-center">
+                            <Link href="/" className="flex items-center">
                                 <Image
                                     src="/images/logo.png"
                                     alt="FindLead.ai"
@@ -58,7 +58,7 @@ export default function Navbar() {
                         {/* Desktop Navigation moved next to Logo */}
                         <div className="hidden lg:flex gap-8 items-center font-semibold text-sm text-[#121212]">
                             <Link href="/" className="hover:text-gray-600 transition-colors">Home</Link>
-                            <Link href="#" className="hover:text-gray-600 transition-colors">Product</Link>
+
                             <Link href="/pricing" className="hover:text-gray-600 transition-colors">Pricing</Link>
                             <Link href="#" className="hover:text-gray-600 transition-colors">Blog</Link>
                             <Link href="#" className="hover:text-gray-600 transition-colors">Contact</Link>
@@ -104,8 +104,10 @@ export default function Navbar() {
                             <div className="border-b border-gray-100 pb-4">
                                 <Link href="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
                             </div>
-                            <div className="border-b border-gray-100 pb-4">Product</div>
-                            <div className="border-b border-gray-100 pb-4">Pricing</div>
+
+                            <div className="border-b border-gray-100 pb-4">
+                                <Link href="/pricing" onClick={() => setIsMenuOpen(false)}>Pricing</Link>
+                            </div>
                             <div className="border-b border-gray-100 pb-4">Blog</div>
                             <div className="pb-4">Contact</div>
                         </div>
