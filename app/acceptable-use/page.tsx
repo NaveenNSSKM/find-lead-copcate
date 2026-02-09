@@ -1,61 +1,144 @@
+'use client'
 
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { useState } from "react"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
 
 export default function AcceptableUsePolicy() {
-    return (
-        <main className="min-h-screen bg-white">
-            <Navbar />
+  const [mode, setMode] = useState<'simple' | 'legal'>('legal')
 
-            <div className="max-w-4xl mx-auto px-4 py-20 mt-16 md:mt-24">
-                <h1 className="text-4xl md:text-5xl font-heading font-bold mb-8 text-[#121212]">Acceptable Use Policy</h1>
+  return (
+    <main className="min-h-screen bg-white">
+      <Navbar />
 
-                <div className="prose prose-lg max-w-none text-gray-600 font-sans">
-                    <p className="mb-6">Effective Date: {new Date().toLocaleDateString()}</p>
+      <div className="max-w-4xl mx-auto px-4 py-20 mt-16 md:mt-24">
+        <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-[#121212]">
+          Acceptable Use Policy
+        </h1>
 
-                    <p className="mb-6">
-                        This Acceptable Use Policy ("AUP") governs your use of services provided by FindLead.ai. We are committed to ensuring our platform is used responsibly and lawfully.
-                    </p>
+        <p className="text-gray-500 mb-8">
+          Last Updated: Dec 3, 2025
+        </p>
 
-                    <h2 className="text-2xl font-bold text-[#121212] mt-8 mb-4">1. Prohibited Activities</h2>
-                    <p className="mb-6">
-                        You agree not to use the FindLead.ai services for any of the following prohibited activities:
-                    </p>
-                    <ul className="list-disc pl-6 mb-6 space-y-2">
-                        <li>Engaging in any illegal activities or promoting illegal acts.</li>
-                        <li>Sending unsolicited bulk emails (SPAM) in violation of applicable laws.</li>
-                        <li>Infringing upon the intellectual property rights of others.</li>
-                        <li>Attempting to interfere with, compromise the system integrity or security, or decipher any transmissions to or from the servers running the Service.</li>
-                        <li>Uploading invalid data, viruses, worms, or other software agents.</li>
-                    </ul>
+        {/* Toggle */}
+        <div className="flex gap-3 mb-10">
+          <button
+            onClick={() => setMode('legal')}
+            className={`px-4 py-2 rounded-md text-sm font-medium ${
+              mode === 'legal'
+                ? 'bg-black text-white'
+                : 'bg-gray-100 text-gray-700'
+            }`}
+          >
+            Legal Version
+          </button>
+          <button
+            onClick={() => setMode('simple')}
+            className={`px-4 py-2 rounded-md text-sm font-medium ${
+              mode === 'simple'
+                ? 'bg-black text-white'
+                : 'bg-gray-100 text-gray-700'
+            }`}
+          >
+            Simple Version
+          </button>
+        </div>
 
-                    <h2 className="text-2xl font-bold text-[#121212] mt-8 mb-4">2. Your Responsibilities</h2>
-                    <p className="mb-6">
-                        You are responsible for your conduct and content while using the Service. You must comply with the following requirements:
-                    </p>
-                    <ul className="list-disc pl-6 mb-6 space-y-2">
-                        <li>Maintain the confidentiality of your account credentials.</li>
-                        <li>Ensure that all data you provide is accurate and lawful.</li>
-                        <li>Respect the privacy and rights of others.</li>
-                    </ul>
+        <div className="prose prose-lg max-w-none text-gray-700">
 
-                    <h2 className="text-2xl font-bold text-[#121212] mt-8 mb-4">3. Enforcement</h2>
-                    <p className="mb-6">
-                        We reserve the right to investigate and take appropriate legal action against anyone who, in our sole discretion, violates this provision, including without limitation, suspending or terminating your account and reporting you to the law enforcement authorities.
-                    </p>
+          {mode === 'legal' ? (
+            <>
+              <h2>1. Purpose and Scope</h2>
+              <p>
+                This Acceptable Use Policy ("AUP") governs access to and use of
+                the FindLead.ai platform, software, APIs, and related services
+                (collectively, the “Service”). This AUP forms part of the Terms
+                of Service agreement between FindLead and the Subscriber.
+              </p>
 
-                    <h2 className="text-2xl font-bold text-[#121212] mt-8 mb-4">4. Updates to Policy</h2>
-                    <p className="mb-6">
-                        We may update this Acceptable Use Policy from time to time. The updated version will be indicated by an updated "Revised" date and will be effective as soon as it is accessible.
-                    </p>
+              <h2>2. Permitted Use</h2>
+              <p>
+                You may use the Service solely for lawful business purposes,
+                including B2B lead research, sales intelligence, and outreach,
+                provided such use complies with all applicable laws and
+                regulations.
+              </p>
 
-                    <p className="mb-6">
-                        Contact us at support@findlead.ai if you have any questions regarding this policy.
-                    </p>
-                </div>
-            </div>
+              <h2>3. Prohibited Use</h2>
+              <ul>
+                <li>Use of the Service for unlawful, deceptive, or fraudulent activities.</li>
+                <li>Transmission of spam, phishing, or unsolicited bulk communications.</li>
+                <li>Violation of data protection, privacy, or consumer protection laws.</li>
+                <li>Uploading malicious code, malware, or harmful software.</li>
+                <li>Attempting to reverse engineer, scrape, or abuse platform limits.</li>
+                <li>Reselling or sublicensing the Service without authorization.</li>
+              </ul>
 
-            <Footer />
-        </main>
-    );
+              <h2>4. Compliance With Laws</h2>
+              <p>
+                You are solely responsible for ensuring compliance with all
+                applicable laws, including but not limited to CAN-SPAM, GDPR,
+                DPDP Act (India), PECR, and other regional data protection and
+                marketing regulations.
+              </p>
+
+              <h2>5. Monitoring and Enforcement</h2>
+              <p>
+                FindLead reserves the right to monitor usage to ensure
+                compliance. We may suspend, restrict, or terminate access if we
+                reasonably believe this AUP has been violated.
+              </p>
+
+              <h2>6. Suspension and Termination</h2>
+              <p>
+                Any violation of this AUP may result in immediate suspension or
+                termination of your account, without notice, and without refund.
+              </p>
+
+              <h2>7. Policy Updates</h2>
+              <p>
+                We may update this AUP at any time. Continued use of the Service
+                after updates constitutes acceptance of the revised policy.
+              </p>
+
+              <h2>8. Contact</h2>
+              <p>
+                Questions regarding this policy should be sent to
+                support@findlead.ai.
+              </p>
+            </>
+          ) : (
+            <>
+              <p>
+                This policy explains how you can and cannot use FindLead.ai.
+                Please use our platform responsibly and legally.
+              </p>
+
+              <h2>What you should not do</h2>
+              <ul>
+                <li>Send spam or illegal emails</li>
+                <li>Upload viruses or harmful files</li>
+                <li>Misuse data or violate privacy laws</li>
+                <li>Hack, scrape, or abuse the platform</li>
+              </ul>
+
+              <h2>Your responsibility</h2>
+              <p>
+                You are responsible for complying with all laws related to
+                outreach, data usage, and privacy in your region.
+              </p>
+
+              <h2>What happens if rules are broken</h2>
+              <p>
+                Accounts may be suspended or terminated if this policy is
+                violated.
+              </p>
+            </>
+          )}
+        </div>
+      </div>
+
+      <Footer />
+    </main>
+  )
 }
