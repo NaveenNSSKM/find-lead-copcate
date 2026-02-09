@@ -9,7 +9,7 @@ export default function AcceptableUsePolicy() {
     
 
     <main className="mt-[90px] max-w-4xl mx-auto px-6 py-10 text-gray-800">
-      <Navbar />
+      
       <h1 className="text-3xl font-bold mb-2">Terms of Service</h1>
       <p className="text-sm text-gray-500 mb-6">
         Last Updated: Dec 3, 2025
@@ -50,7 +50,7 @@ export default function AcceptableUsePolicy() {
 
 
 
-      <Footer />
+     
     </main>
   );
 }
