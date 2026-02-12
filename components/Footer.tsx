@@ -26,11 +26,9 @@ export default function Footer() {
                             Privacy Policy
                         </Link>
                         <Link href="/acceptable-use" className="hover:text-gray-900 transition-colors whitespace-nowrap">
-                            Acceptable Use Policy
-                        </Link>
-                        <Link href="#" className="hover:text-gray-900 transition-colors whitespace-nowrap">
                             Terms of Service
                         </Link>
+                      
                     </div>
 
                 </div>

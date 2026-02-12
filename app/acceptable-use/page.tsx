@@ -20,7 +20,7 @@ export default function AcceptableUsePolicy() {
       </div>
 
       {/* Content Section */}
-      <main className="max-w-4xl mx-auto px-6 py-14 text-gray-800 leading-relaxed">
+      <main className="max-w-6xl mx-auto px-6 py-14 text-gray-800 leading-relaxed">
         
         <p className="mb-4 font-semibold text-lg">
           IMPORTANT:
@@ -83,7 +83,7 @@ export default function AcceptableUsePolicy() {
           TERMS AND CONDITIONS
         </h2>
 
-        <h3 className="text-xl font-semibold mb-4">
+        <h3 className="text-3xl font-semibold mb-4">
           1. Definitions.  As used in this Agreement:
 
         </h3>
@@ -229,7 +229,7 @@ export default function AcceptableUsePolicy() {
         {/* SECTION 2 */}
         {/* =============================== */}
 
-        <h3 className="text-xl font-semibold mt-14 mb-6">
+        <h3 className="text-3xl font-semibold mt-14 mb-6">
           2. Onboarding and Connected Accounts
         </h3>
 
@@ -252,7 +252,7 @@ export default function AcceptableUsePolicy() {
         {/* SECTION 3 */}
         {/* =============================== */}
 
-        <h3 className="text-xl font-semibold mt-14 mb-6">
+        <h3 className="text-3xl font-semibold mt-14 mb-6">
           3. Support
         </h3>
 
@@ -278,7 +278,7 @@ export default function AcceptableUsePolicy() {
         {/* SECTION 4 */}
         {/* =============================== */}
 
-        <h3 className="text-xl font-semibold mt-16 mb-6">
+        <h3 className="text-3xl font-semibold mt-16 mb-6">
           4. Subscriber’s Use of the Findlead Service
         </h3>
 
@@ -367,7 +367,7 @@ The unique Credentials cannot be shared or used by more than one individual User
         {/* SECTION 5 */}
         {/* =============================== */}
 
-        <h3 className="text-xl font-semibold mt-16 mb-6">
+        <h3 className="text-3xl font-semibold mt-16 mb-6">
       5. Fees, Payment and Suspension of Findlead Service.
         </h3>
 
@@ -435,7 +435,7 @@ The unique Credentials cannot be shared or used by more than one individual User
         {/* SECTION 6 */}
         {/* =============================== */}
 
-        <h3 className="text-xl font-semibold mt-16 mb-6">
+        <h3 className="text-3xl font-semibold mt-16 mb-6">
      6. Ownership; Content; and Data.
 
         </h3>
@@ -493,7 +493,7 @@ As between Findlead and Subscriber, all right, title, and interest in Aggregated
         {/* SECTION 7 */}
         {/* =============================== */}
 
-        <h3 className="text-xl font-semibold mt-16 mb-6">
+        <h3 className="text-3xl font-semibold mt-16 mb-6">
 7. CONFIDENTIALITY.
 
 
@@ -560,7 +560,7 @@ As between Findlead and Subscriber, all right, title, and interest in Aggregated
         {/* SECTION 8 */}
         {/* =============================== */}
 
-        <h3 className="text-xl font-semibold mt-16 mb-6">
+        <h3 className="text-3xl font-semibold mt-16 mb-6">
 8. Term and Termination.  
 
 
@@ -593,7 +593,7 @@ Either party may terminate this Agreement or specific subscription plan upon wri
         {/* SECTION 9 */}
         {/* =============================== */}
 
-        <h3 className="text-xl font-semibold mt-16 mb-6">
+        <h3 className="text-3xl font-semibold mt-16 mb-6">
 9. Findlead Warranties and Disclaimer.   
 
 
@@ -639,7 +639,7 @@ Either party may terminate this Agreement or specific subscription plan upon wri
         {/* SECTION 10 */}
         {/* =============================== */}
 
-        <h3 className="text-xl font-semibold mt-16 mb-6">
+        <h3 className="text-3xl font-semibold mt-16 mb-6">
 10. Indemnity.  
 
 
@@ -671,7 +671,7 @@ Either party may terminate this Agreement or specific subscription plan upon wri
         {/* SECTION 11 */}
         {/* =============================== */}
 
-        <h3 className="text-xl font-semibold mt-16 mb-6">
+        <h3 className="text-3xl font-semibold mt-16 mb-6">
 11. Limitation of Liability.    
 
 
@@ -820,7 +820,7 @@ All parties agree that Requests are of a “substantially similar nature” if t
         {/* SECTION 13 */}
         {/* =============================== */}
 
-        <h3 className="text-xl font-semibold mt-16 mb-6">
+        <h3 className="text-3xl font-semibold mt-16 mb-6">
 13. General Provisions.  
 
 
