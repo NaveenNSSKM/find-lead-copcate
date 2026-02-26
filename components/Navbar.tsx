@@ -60,7 +60,7 @@ export default function Navbar() {
                             <Link href="/" className="hover:text-gray-600 transition-colors">Home</Link>
 
                             <Link href="/pricing" className="hover:text-gray-600 transition-colors">Pricing</Link>
-                            <Link href="#" className="hover:text-gray-600 transition-colors">Blog</Link>
+                            <Link href="/blog" className="hover:text-gray-600 transition-colors">Blog</Link>
                             <Link href="#" className="hover:text-gray-600 transition-colors">Contact</Link>
                         </div>
                     </div>
@@ -108,7 +108,9 @@ export default function Navbar() {
                             <div className="border-b border-gray-100 pb-4">
                                 <Link href="/pricing" onClick={() => setIsMenuOpen(false)}>Pricing</Link>
                             </div>
-                            <div className="border-b border-gray-100 pb-4">Blog</div>
+                            <div className="border-b border-gray-100 pb-4">
+                                <Link href="/blog" onClick={() => setIsMenuOpen(false)}>Blog</Link>
+                            </div>
                             <div className="pb-4">Contact</div>
                         </div>
                     </div>
