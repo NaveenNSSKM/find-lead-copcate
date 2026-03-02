@@ -5,17 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // ─── Supabase Admin Client (Server Side Only - Bypasses RLS) ──────────────────
-const getSupabaseAdmin = () => {
+// ─── Supabase Admin Client ──────────────────
+const getSupabaseConfig = () => {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-    if (!url || !key) {
-        console.error('Supabase environment variables are missing!');
-        return null;
-    }
-
-    return createClient(url, key);
+    return { url, key };
 };
+
 
 
 interface BlogPost {
@@ -32,34 +28,30 @@ export const revalidate = 0; // Fetch fresh data on every request
 
 // ─── Data Fetching ────────────────────────────────────────────────────────
 async function getBlogPosts() {
-    const supabaseAdmin = getSupabaseAdmin();
-    if (!supabaseAdmin) return [];
+    const { url, key } = getSupabaseConfig();
+    if (!url || !key) return [];
 
-    const tablesToTry = ['findlead-ai-blog', 'blog', 'posts'];
-    let allPosts: BlogPost[] = [];
+    const supabase = createClient(url, key, {
+        global: {
+            fetch: (u, o) => fetch(u, { ...o, cache: 'no-store' }),
+        },
+    });
 
-    for (const tableName of tablesToTry) {
-        try {
-            const { data, error } = await supabaseAdmin
-                .from(tableName)
-                .select('*')
-                .order('id', { ascending: false });
+    try {
+        const { data, error } = await supabase
+            .from('findlead-ai-blog')
+            .select('*')
+            .order('id', { ascending: false });
 
-            if (!error && data && data.length > 0) {
-                allPosts = data;
-                break; // Found data, stop searching
-            }
-        } catch (err) {
-            console.error(`Error checking table ${tableName}:`, err);
-        }
+        if (error || !data) return [];
+
+        const published = data.filter(p => !p.status || p.status.toLowerCase() === 'published');
+        return published.length > 0 ? published : data;
+    } catch (e) {
+        return [];
     }
-
-    // Process posts: filter for 'published' in memory to be case-insensitive
-    const publishedPosts = allPosts.filter(p => !p.status || p.status.toLowerCase() === 'published');
-
-    // Fallback to allPosts if no 'published' found (better for debugging)
-    return publishedPosts.length > 0 ? publishedPosts : allPosts;
 }
+
 
 export default async function BlogPage({
     searchParams,
@@ -143,6 +135,18 @@ export default async function BlogPage({
     return (
         <main className="min-h-screen bg-[#EFE34B]">
             <Navbar />
+
+            {/* Connection Check (Visible if no posts) */}
+            {displayPosts.length === 0 && (
+                <div className="pt-24 px-6 md:px-12 max-w-[1440px] mx-auto opacity-50">
+                    <div className="p-4 rounded-xl text-xs font-mono">
+                        Server Detection:
+                        [URL: {!!process.env.NEXT_PUBLIC_SUPABASE_URL ? '✅' : '❌'}]
+                        [Key: {!!process.env.SUPABASE_SERVICE_ROLE_KEY ? '✅' : '❌'}]
+                    </div>
+                </div>
+            )}
+
 
             <div className="pt-32 pb-16 px-6 md:px-12 max-w-[1440px] mx-auto">
                 <h1 className="text-5xl md:text-7xl font-bold mb-12 text-[#121212]">Blog</h1>
