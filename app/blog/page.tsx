@@ -5,10 +5,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // ─── Supabase Admin Client (Server Side Only - Bypasses RLS) ──────────────────
-const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+const getSupabaseAdmin = () => {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!url || !key) {
+        console.error('Supabase environment variables are missing!');
+        return null;
+    }
+
+    return createClient(url, key);
+};
+
 
 interface BlogPost {
     id: number;
@@ -32,25 +40,57 @@ export default async function BlogPage({
     const selectedId = params.id;
 
     let allPosts: BlogPost[] = [];
-    try {
-        const { data, error } = await supabaseAdmin
-            .from('findlead-ai-blog')
-            .select('*')
-            .eq('status', 'published')
-            .order('id', { ascending: false });
+    const supabaseAdmin = getSupabaseAdmin();
 
-        if (!error && data) allPosts = data;
-    } catch (err) {
-        console.error('Fetch error:', err);
+    if (supabaseAdmin) {
+        try {
+            // Try the current table name first
+            const { data, error } = await supabaseAdmin
+                .from('findlead-ai-blog')
+                .select('*')
+                .order('id', { ascending: false });
+
+            if (error) {
+                console.error('Supabase fetch error (findlead-ai-blog):', error);
+
+                // Try fallback table name 'blog' if first one fails
+                const { data: fallbackData, error: fallbackError } = await supabaseAdmin
+                    .from('blog')
+                    .select('*')
+                    .order('id', { ascending: false });
+
+                if (!fallbackError && fallbackData) {
+                    allPosts = fallbackData;
+                }
+            } else if (data && data.length > 0) {
+                allPosts = data;
+            } else {
+                // Even if no error, try 'blog' if 'findlead-ai-blog' is empty
+                const { data: fallbackData } = await supabaseAdmin
+                    .from('blog')
+                    .select('*')
+                    .order('id', { ascending: false });
+                if (fallbackData) allPosts = fallbackData;
+            }
+        } catch (err) {
+            console.error('Fetch error:', err);
+        }
     }
 
-    const categories = ['All', ...Array.from(new Set(allPosts.map((p) => p.category).filter(Boolean)))];
+    // Filter in memory to handle different status strings (published, Published, draft etc.)
+    const publishedPosts = allPosts.filter(p => !p.status || p.status.toLowerCase() === 'published');
+
+    // Use the filtered posts for display, but fallback to allPosts if none are marked published (for debugging/safety)
+    const displayPosts = publishedPosts.length > 0 ? publishedPosts : allPosts;
+
+    const categories = ['All', ...Array.from(new Set(displayPosts.map((p) => p.category).filter(Boolean)))];
 
     const filteredPosts =
-        activeCategory === 'All' ? allPosts : allPosts.filter((p) => p.category === activeCategory);
+        activeCategory === 'All' ? displayPosts : displayPosts.filter((p) => p.category === activeCategory);
 
     // Find selected post if ID is in URL
-    const selectedPost = selectedId ? allPosts.find(p => p.id.toString() === selectedId) : null;
+    const selectedPost = selectedId ? displayPosts.find(p => p.id.toString() === selectedId) : null;
+
 
     // ──────────────────────────────────────────────────────────────────────────
     // Single Article View
