@@ -30,6 +30,37 @@ interface BlogPost {
 
 export const revalidate = 0; // Fetch fresh data on every request
 
+// ─── Data Fetching ────────────────────────────────────────────────────────
+async function getBlogPosts() {
+    const supabaseAdmin = getSupabaseAdmin();
+    if (!supabaseAdmin) return [];
+
+    const tablesToTry = ['findlead-ai-blog', 'blog', 'posts'];
+    let allPosts: BlogPost[] = [];
+
+    for (const tableName of tablesToTry) {
+        try {
+            const { data, error } = await supabaseAdmin
+                .from(tableName)
+                .select('*')
+                .order('id', { ascending: false });
+
+            if (!error && data && data.length > 0) {
+                allPosts = data;
+                break; // Found data, stop searching
+            }
+        } catch (err) {
+            console.error(`Error checking table ${tableName}:`, err);
+        }
+    }
+
+    // Process posts: filter for 'published' in memory to be case-insensitive
+    const publishedPosts = allPosts.filter(p => !p.status || p.status.toLowerCase() === 'published');
+
+    // Fallback to allPosts if no 'published' found (better for debugging)
+    return publishedPosts.length > 0 ? publishedPosts : allPosts;
+}
+
 export default async function BlogPage({
     searchParams,
 }: {
@@ -39,49 +70,8 @@ export default async function BlogPage({
     const activeCategory = params.category || 'All';
     const selectedId = params.id;
 
-    let allPosts: BlogPost[] = [];
-    const supabaseAdmin = getSupabaseAdmin();
-
-    if (supabaseAdmin) {
-        try {
-            // Try the current table name first
-            const { data, error } = await supabaseAdmin
-                .from('findlead-ai-blog')
-                .select('*')
-                .order('id', { ascending: false });
-
-            if (error) {
-                console.error('Supabase fetch error (findlead-ai-blog):', error);
-
-                // Try fallback table name 'blog' if first one fails
-                const { data: fallbackData, error: fallbackError } = await supabaseAdmin
-                    .from('blog')
-                    .select('*')
-                    .order('id', { ascending: false });
-
-                if (!fallbackError && fallbackData) {
-                    allPosts = fallbackData;
-                }
-            } else if (data && data.length > 0) {
-                allPosts = data;
-            } else {
-                // Even if no error, try 'blog' if 'findlead-ai-blog' is empty
-                const { data: fallbackData } = await supabaseAdmin
-                    .from('blog')
-                    .select('*')
-                    .order('id', { ascending: false });
-                if (fallbackData) allPosts = fallbackData;
-            }
-        } catch (err) {
-            console.error('Fetch error:', err);
-        }
-    }
-
-    // Filter in memory to handle different status strings (published, Published, draft etc.)
-    const publishedPosts = allPosts.filter(p => !p.status || p.status.toLowerCase() === 'published');
-
-    // Use the filtered posts for display, but fallback to allPosts if none are marked published (for debugging/safety)
-    const displayPosts = publishedPosts.length > 0 ? publishedPosts : allPosts;
+    // Fetch data directly in the Server Component
+    const displayPosts = await getBlogPosts();
 
     const categories = ['All', ...Array.from(new Set(displayPosts.map((p) => p.category).filter(Boolean)))];
 
@@ -90,6 +80,7 @@ export default async function BlogPage({
 
     // Find selected post if ID is in URL
     const selectedPost = selectedId ? displayPosts.find(p => p.id.toString() === selectedId) : null;
+
 
 
     // ──────────────────────────────────────────────────────────────────────────
@@ -173,11 +164,12 @@ export default async function BlogPage({
                 </div>
 
                 {/* Empty State */}
-                {allPosts.length === 0 && (
+                {displayPosts.length === 0 && (
                     <p className="text-[#121212] text-lg font-medium opacity-60 mt-8 italic text-left">
                         No published posts found...
                     </p>
                 )}
+
 
                 {/* Featured Post */}
                 {featuredPost && (
