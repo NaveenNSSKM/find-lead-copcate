@@ -89,6 +89,7 @@ export default async function BlogPage({
                             className="object-cover"
                             priority
                             sizes="(max-width: 1024px) 100vw, 1024px"
+                            unoptimized
                         />
                     </div>
 
@@ -124,19 +125,55 @@ export default async function BlogPage({
                 <h1 className="text-5xl md:text-7xl font-bold mb-12 text-[#121212]">Blog</h1>
 
                 {/* Categories Filter */}
-                <div className="flex flex-wrap gap-3 mb-16">
-                    {categories.map((cat) => (
-                        <Link
-                            key={cat}
-                            href={cat === 'All' ? '/blog' : `/blog?category=${encodeURIComponent(cat)}`}
-                            className={`px-6 py-3 rounded-full text-sm font-semibold transition-all ${activeCategory === cat
-                                ? 'bg-[#121212] text-white'
-                                : 'bg-white text-[#121212] hover:bg-gray-100 shadow-sm'
-                                }`}
-                        >
-                            {cat}
-                        </Link>
-                    ))}
+                <div className="mb-16 relative z-30">
+                    {/* Mobile Dropdown */}
+                    <div className="md:hidden">
+                        <details className="group relative w-full">
+                            <summary className="list-none flex justify-between items-center bg-white p-4 rounded-full shadow-sm text-[#121212] font-bold cursor-pointer w-full outline-none select-none">
+                                <span className="ml-2">{activeCategory}</span>
+                                <svg className="w-5 h-5 transition-transform group-open:rotate-180 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                </svg>
+                            </summary>
+                            <div className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white rounded-[24px] p-2 flex flex-col gap-1 border border-[#121212]/10 max-h-[50vh] overflow-y-auto" style={{ boxShadow: '0 10px 40px -10px rgba(0,0,0,0.1)' }}>
+                                {categories.map((cat) => (
+                                    <Link
+                                        key={cat}
+                                        href={cat === 'All' ? '/blog' : `/blog?category=${encodeURIComponent(cat)}`}
+                                        className={`px-6 py-3 rounded-full text-sm font-bold transition-all ${activeCategory === cat
+                                            ? 'bg-[#EFE34B] text-[#121212]'
+                                            : 'bg-transparent text-[#121212] hover:bg-gray-100'
+                                            }`}
+                                    >
+                                        {cat}
+                                    </Link>
+                                ))}
+                            </div>
+                        </details>
+                        <style>{`
+                            details > summary::-webkit-details-marker {
+                                display: none;
+                            }
+                        `}</style>
+                    </div>
+
+                    {/* Desktop Pill */}
+                    <div className="hidden md:flex w-full justify-center">
+                        <div className="bg-white rounded-full p-2 flex items-center gap-2 w-max shadow-sm">
+                            {categories.map((cat) => (
+                                <Link
+                                    key={cat}
+                                    href={cat === 'All' ? '/blog' : `/blog?category=${encodeURIComponent(cat)}`}
+                                    className={`px-6 py-3 rounded-full text-sm font-bold transition-all whitespace-nowrap ${activeCategory === cat
+                                        ? 'bg-[#EFE34B] text-[#121212]'
+                                        : 'bg-transparent text-[#121212] hover:bg-gray-100'
+                                        }`}
+                                >
+                                    {cat}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
                 {/* Empty State */}
@@ -180,6 +217,7 @@ export default async function BlogPage({
                                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                                 sizes="(max-width: 1024px) 100vw, 50vw"
                                 priority
+                                unoptimized
                             />
                         </div>
                     </Link>
@@ -201,6 +239,7 @@ export default async function BlogPage({
                                         fill
                                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        unoptimized
                                     />
                                 </div>
                                 <div className="p-8 flex flex-col flex-grow">
@@ -245,7 +284,50 @@ export default async function BlogPage({
                     </div>
                 </div>
             </div>
+   {/* Accelerate Growth Section */}
+            <section
+                className="py-24 px-6 relative overflow-hidden"
+                style={{
+                    backgroundImage: 'url(/images/bg-subscribe.png)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundColor: '#111' // Fallback color
+                }
+                }
+            >
+                <div className="max-w-[1100px] mx-auto relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        {/* Left Content */}
+                        <div>
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading tracking-wide text-white uppercase mb-2">
+                                ACCELERATE YOUR
+                            </h2>
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold tracking-wide text-[#EFE34B] uppercase">
+                                BUSINESS GROWTH.
+                            </h2>
+                        </div>
 
+                        {/* Right Form */}
+                        <div className="lg:pl-12">
+                            <label className="block text-white text-sm mb-2 pl-4">Email*</label>
+                            <div className="flex bg-[#222] rounded-full p-1 border border-gray-600 max-w-lg">
+                                <input
+                                    type="email"
+                                    placeholder="What's your work email?"
+                                    className="flex-1 bg-transparent text-white px-6 py-3 outline-none placeholder-gray-400 rounded-l-full"
+                                />
+                                <button className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors whitespace-nowrap">
+                                    Contact Us
+                                </button>
+                            </div>
+                            <p className="text-gray-400 text-xs mt-3 pl-4">
+                                Free leads | Credit cards not required
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <Footer />
         </main>
     );
