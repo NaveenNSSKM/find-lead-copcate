@@ -28,6 +28,9 @@ export default function Footer() {
                         <Link href="/acceptable-use" className="hover:text-gray-900 transition-colors whitespace-nowrap">
                             Terms of Service
                         </Link>
+                        <Link href="/contact" className="hover:text-gray-900 transition-colors whitespace-nowrap">
+                            Contact Us
+                        </Link>
                       
                     </div>
 

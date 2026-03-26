@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link href="https://api.fontshare.com/v2/css?f%5B%5D=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
       </head>
