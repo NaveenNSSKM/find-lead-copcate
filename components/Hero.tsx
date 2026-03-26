@@ -61,9 +61,9 @@ export default function Hero() {
                         />
                     </div>
 
-                    <h3 className="text-xl md:text-2xl font-bold text-black mb-8 text-center relative z-10 mt-4">
+                    <h2 className="text-xl md:text-2xl font-bold text-black mb-8 text-center relative z-10 mt-4">
                         Trusted by Agile Teams, GTM Agencies, and Founder-Led Startups.
-                    </h3>
+                    </h2>
 
                     <div className="flex flex-wrap gap-8 md:gap-12 justify-center items-center grayscale opacity-90 scale-90">
                         <Image src="/images/partner-amazon.png" alt="Amazon" width={90} height={35} className="h-8 w-auto object-contain" />

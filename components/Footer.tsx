@@ -37,7 +37,7 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Section: Copyright (Centered on All Viewports) */}
-                <div className="w-full text-center text-sm text-gray-400">
+                <div className="w-full text-center text-sm text-gray-600">
                     © 2026. All rights reserved.
                 </div>
 

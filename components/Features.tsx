@@ -6,7 +6,7 @@ export default function Features() {
             <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center mb-20">
                     <h2 className="text-3xl md:text-5xl font-heading font-semibold text-black mb-4">The &quot;Sniper&quot; Toolkit</h2>
-                    <p className="text-xl text-gray-500 max-w-2xl mx-auto">Everything you need to execute precise, high-conversion campaigns.</p>
+                    <p className="text-xl text-gray-700 max-w-2xl mx-auto">Everything you need to execute precise, high-conversion campaigns.</p>
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

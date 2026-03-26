@@ -7,7 +7,7 @@ export default function Intelligence() {
                 <div>
                     <h2 className="text-3xl md:text-5xl font-heading font-semibold mb-12 leading-tight text-black">
                         Strategic Intelligence. <br />
-                        <span className="text-gray-400">Not Just Automation.</span>
+                        <span className="text-black/40">Not Just Automation.</span>
                     </h2>
                     <ul className="space-y-8">
                         {[
@@ -22,7 +22,7 @@ export default function Intelligence() {
                                 </div>
                                 <div>
                                     <h3 className="font-heading font-semibold text-lg mb-2 text-black">{item.title}</h3>
-                                    <p className="text-gray-500 leading-relaxed">{item.desc}</p>
+                                <div className="text-black/60 leading-relaxed">{item.desc}</div>
                                 </div>
                             </li>
                         ))}

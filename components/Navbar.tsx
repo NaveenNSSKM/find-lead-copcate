@@ -47,6 +47,7 @@ export default function Navbar() {
                             {/* Mobile Hamburger Toggle */}
                             <button
                                 onClick={() => setIsMenuOpen(true)}
+                                aria-label="Open mobile menu"
                                 className="lg:hidden flex flex-col justify-center items-center gap-[5px] w-8 h-8 p-1"
                             >
                                 <span className="block w-6 h-[2px] bg-[#00358E] rounded-full"></span>
@@ -90,6 +91,7 @@ export default function Navbar() {
                             </Link>
                             <button
                                 onClick={() => setIsMenuOpen(false)}
+                                aria-label="Close mobile menu"
                                 className="p-2 text-gray-800"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

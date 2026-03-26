@@ -11,7 +11,7 @@ export default function Capabilities() {
                 <div className="grid lg:grid-cols-[2fr_1fr] gap-6 lg:grid-rows-2">
                     <div className="bg-white p-8 rounded-[2rem] lg:row-span-2 flex flex-col justify-center border border-gray-100 shadow-soft overflow-hidden group">
                         <h3 className="text-2xl font-heading font-semibold mb-4 text-black">3-Step Campaign Launch</h3>
-                        <p className="text-gray-500 text-lg mb-10">Define objective, sequence your drips, and launch. It’s the simplest GTM engine ever built for SMBs.</p>
+                        <p className="text-gray-700 text-lg mb-10">Define objective, sequence your drips, and launch. It’s the simplest GTM engine ever built for SMBs.</p>
                         <div className="relative w-full h-[300px] md:h-[400px] rounded-2xl overflow-hidden bg-black">
                             <Image
                                 src="/images/digital-tablet-online-learning.jpg"
