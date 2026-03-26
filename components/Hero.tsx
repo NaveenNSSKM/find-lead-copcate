@@ -41,8 +41,9 @@ export default function Hero() {
                         alt="Hooking prospects"
                         fill
                         priority
+                        fetchPriority="high"
                         className="object-contain object-top lg:object-right"
-                        sizes="(max-width: 1024px) 100vw, 34vw"
+                        sizes="(max-width: 1024px) 100vw, (max-width: 1440px) 34vw, 500px"
                     />
                 </div>
             </div>

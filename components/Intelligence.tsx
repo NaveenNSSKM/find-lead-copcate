@@ -38,6 +38,7 @@ export default function Intelligence() {
                         width={800}
                         height={600}
                         className="relative z-10 w-full h-auto drop-shadow-2xl rounded-2xl"
+                        sizes="(max-width: 1024px) 95vw, 45vw"
                     />
                 </div>
             </div>
