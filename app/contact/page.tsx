@@ -72,7 +72,7 @@ export default function ContactPage() {
                         transition={{ duration: 0.8 }}
                         className="text-center md:text-left"
                     >
-                        <h1 className="text-6xl md:text-9xl font-black mb-6 text-[#121212] tracking-tighter leading-none">
+                        <h1 className="text-5xl sm:text-7xl md:text-9xl font-black mb-6 text-[#121212] tracking-tighter leading-none">
                             LET'S <span className="text-[#121212] opacity-40 italic font-medium">TALK.</span>
                         </h1>
                         <p className="text-black/70 text-lg md:text-xl max-w-2xl leading-relaxed font-bold">
@@ -99,7 +99,7 @@ export default function ContactPage() {
                                 <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#121212" strokeWidth="0.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                             </div>
                             
-                            <h2 className="text-xs font-black mb-10 text-black/40 uppercase tracking-[0.4em]">Connect With Us</h2>
+                            <h2 className="text-xs font-black mb-10 text-black uppercase tracking-[0.4em]">Connect With Us</h2>
                             <div className="space-y-10 relative z-10">
                                 <ContactInfoItem 
                                     title="Phone" 
@@ -119,7 +119,7 @@ export default function ContactPage() {
                             </div>
 
                             <div className="mt-16 pt-10 border-t border-gray-100">
-                                <h3 className="text-[10px] font-black mb-6 text-black/40 uppercase tracking-widest">Follow Our Journey</h3>
+                                <h3 className="text-[10px] font-black mb-6 text-black uppercase tracking-widest">Follow Our Journey</h3>
                                 <div className="flex gap-4">
                                     <SocialLink icon={<LinkedinIcon />} name="LinkedIn" />
                                     <SocialLink icon={<InstagramIcon />} name="Instagram" />
@@ -148,7 +148,7 @@ export default function ContactPage() {
                         initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.3 }}
-                        className="lg:col-span-8 bg-white/90 backdrop-blur-xl border border-white rounded-[48px] p-8 md:p-16 shadow-[0_30px_70px_rgba(0,0,0,0.08)] relative overflow-hidden"
+                        className="lg:col-span-8 bg-white/90 backdrop-blur-xl border border-white rounded-[32px] md:rounded-[48px] p-6 sm:p-10 md:p-16 shadow-[0_30px_70px_rgba(0,0,0,0.08)] relative overflow-hidden"
                     >
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#EFE34B] to-transparent"></div>
                         
@@ -242,15 +242,15 @@ export default function ContactPage() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1 }}
-                        className="bg-white rounded-[60px] min-h-[700px] overflow-hidden border border-white relative flex flex-col md:flex-row items-center p-8 md:p-20 gap-16 shadow-[0_40px_80px_rgba(0,0,0,0.06)]"
+                        className="bg-white rounded-[32px] sm:rounded-[40px] md:rounded-[60px] min-h-[500px] md:min-h-[700px] overflow-hidden border border-white relative flex flex-col md:flex-row items-center p-6 sm:p-12 md:p-20 gap-10 md:gap-16 shadow-[0_40px_80px_rgba(0,0,0,0.06)]"
                     >
                         {/* Map Overlay */}
                         <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply">
                             <div className="absolute inset-0 bg-[#EFE34B]/20 blur-[150px] rounded-full"></div>
                         </div>
 
-                        <div className="relative z-10 w-full md:w-1/3">
-                            <h3 className="text-5xl md:text-6xl font-black text-[#121212] uppercase mb-6 tracking-tighter leading-[0.9]">Global <br/><span className="text-[#121212] opacity-50">Presence</span></h3>
+                        <div className="relative z-10 w-full md:w-1/3 text-center md:text-left">
+                            <h3 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#121212] uppercase mb-6 tracking-tighter leading-[0.9]">Global <br/><span className="text-[#121212] opacity-50">Presence</span></h3>
                         </div>
 
                         <div className="relative w-full md:w-2/3 aspect-square md:aspect-video flex items-center justify-center">
@@ -279,7 +279,7 @@ export default function ContactPage() {
 function ContactInfoItem({ title, value, icon }: { title: string, value: string, icon: React.ReactNode }) {
     return (
         <div className="flex items-center gap-6 group cursor-pointer">
-            <div className="w-14 h-14 bg-[#EFE34B]/10 border border-[#EFE34B]/20 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-[#121212] group-hover:text-white transition-all duration-500 text-[#121212]">
+            <div className="w-14 h-14 bg-[#EFE34B] border border-[#EFE34B]/20 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-[#121212] group-hover:text-white transition-all duration-500 text-[#121212]">
                 {icon}
             </div>
             <div>
