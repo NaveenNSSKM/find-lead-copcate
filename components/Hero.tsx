@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
     return (
-        <header className="relative bg-white overflow-hidden min-h-[800px]">
+        <header className="relative bg-white overflow-hidden min-h-[600px] lg:min-h-[800px]">
             {/* MAIN WRAPPER */}
             <div className="relative max-w-[1440px] mx-auto px-8 md:px-16 pt-20 pb-8 flex flex-col lg:flex-row lg:items-start">
 

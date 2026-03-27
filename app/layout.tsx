@@ -24,12 +24,23 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${openSans.variable}`}>
        <head>
-        {/* Preconnect to Fontshare to reduce latency for Clash Display font */}
-        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
+        {/* Preconnect to Fontshare to reduce latency for font files */}
         <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
+        
+        {/* Preload critical fonts to eliminate render-blocking delay */}
         <link 
-          href="https://api.fontshare.com/v2/css?f%5B%5D=clash-display@400,500,600,700&display=swap" 
-          rel="stylesheet" 
+          rel="preload" 
+          href="https://cdn.fontshare.com/wf/BFBSY7LX5W2U2EROCLVVTQP4VS7S4PC3/IIUX4FGTMD2LK2VWD3RVTAS4SSMUN7B5/53RZKGODFYDW3QHTIL7IPOWTBCSUEZK7.woff2" 
+          as="font" 
+          type="font/woff2" 
+          crossOrigin="anonymous" 
+        />
+        <link 
+          rel="preload" 
+          href="https://cdn.fontshare.com/wf/VFMK2COV3DN37JR7JQ4CAOJPZ7KWKNY7/ODD5YJNDLHZZB2MIT3DPVH4EIHAMZ34D/BSY64LPTT3OPLVKAZKL3AHKRWZ3D74AC.woff2" 
+          as="font" 
+          type="font/woff2" 
+          crossOrigin="anonymous" 
         />
       </head>
       <body
