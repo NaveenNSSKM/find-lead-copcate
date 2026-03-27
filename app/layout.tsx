@@ -5,12 +5,12 @@ import "./globals.css";
 const openSans = Open_Sans({
   variable: "--font-open-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "FindLead.ai - Hook Your Perfect 100",
   description: "Findlead uses a Strategic AI Agent to research high-intent leads and write handcrafted drips.",
-
   icons: {
     icon: '/images/favicon.png',
   },
@@ -22,13 +22,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://cdn.fontshare.com" />
-        <link href="https://api.fontshare.com/v2/css?f%5B%5D=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
+    <html lang="en" suppressHydrationWarning className={`${openSans.variable}`}>
+       <head>
+        {/* Preconnect to Fontshare to reduce latency for Clash Display font */}
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
+        <link 
+          href="https://api.fontshare.com/v2/css?f%5B%5D=clash-display@400,500,600,700&display=swap" 
+          rel="stylesheet" 
+        />
       </head>
       <body
-        className={`${openSans.variable} antialiased bg-white text-[#121212] overflow-x-hidden`}
+        className="antialiased bg-white text-[#121212] overflow-x-hidden min-h-screen"
       >
         {children}
       </body>

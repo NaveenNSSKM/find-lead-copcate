@@ -42,8 +42,9 @@ export default function Hero() {
                         fill
                         priority
                         fetchPriority="high"
+                        quality={80}
                         className="object-contain object-top lg:object-right"
-                        sizes="(max-width: 1024px) 100vw, (max-width: 1440px) 34vw, 500px"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1440px) 34vw, 500px"
                     />
                 </div>
             </div>
