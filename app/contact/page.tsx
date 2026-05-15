@@ -1,23 +1,80 @@
 "use client";
 
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 
+// --- Styled Icons Recreated from Image ---
+
+const IconPaperPlaneBadge = () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z" fill="#121212" />
+    </svg>
+);
+
+const IconSpeechBubbleFloating = () => (
+    <div className="relative w-20 h-20 md:w-24 md:h-24 flex items-center justify-center">
+        <div className="absolute inset-0 bg-[#FFDE00] rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute inset-0 border-[6px] md:border-[8px] border-[#FFDE00] rounded-full bg-white flex items-center justify-center shadow-lg">
+            <div className="w-10 h-10 md:w-14 md:h-14 bg-[#121212] rounded-full flex items-center justify-center relative">
+                <div className="flex gap-1">
+                    <div className="w-1 md:w-1.5 h-1 md:h-1.5 bg-white rounded-full"></div>
+                    <div className="w-1 md:w-1.5 h-1 md:h-1.5 bg-white rounded-full"></div>
+                    <div className="w-1 md:w-1.5 h-1 md:h-1.5 bg-white rounded-full"></div>
+                </div>
+                <div className="absolute bottom-[-2px] left-1/2 -translate-x-1/2 w-3 h-3 md:w-4 md:h-4 bg-[#121212] rotate-45 rounded-sm"></div>
+            </div>
+        </div>
+        <div className="absolute -top-1 -right-1 md:-top-2 md:-right-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#121212" strokeWidth="3" strokeLinecap="round" className="w-4 h-4 md:w-5 md:h-5">
+                <line x1="12" y1="5" x2="12" y2="2"/><line x1="19" y1="8" x2="21" y2="6"/>
+            </svg>
+        </div>
+    </div>
+);
+
+const IconYellowCircle = ({ children }: { children: React.ReactNode }) => (
+    <div className="w-12 h-12 bg-[#FFDE00] rounded-full flex items-center justify-center text-[#121212] shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+        {children}
+    </div>
+);
+
+const IconUser = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
+const IconEmail = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>;
+const IconTag = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>;
+const IconPencil = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>;
+const IconCloud = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17.5 19c3.037 0 5.5-2.463 5.5-5.5 0-2.798-2.083-5.11-4.785-5.465C17.355 5.21 14.883 3 12 3 9.117 3 6.645 5.21 5.785 8.035 3.083 8.39 1 10.702 1 13.5c0 3.037 2.463 5.5 5.5 5.5h11z"/><polyline points="17 12 12 7 7 12"/><line x1="12" y1="7" x2="12" y2="17"/></svg>;
+const IconMap = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>;
+const IconPhone = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>;
+
+const IconPaperPlaneSubmit = () => (
+    <div className="w-12 h-12 bg-[#FFDE00] rounded-full flex items-center justify-center text-[#121212] border-[2.5px] border-[#121212]">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z" /></svg>
+    </div>
+);
+
+// --- Main Component ---
+
 export default function ContactPage() {
-    const [focusedField, setFocusedField] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
     const [formData, setFormData] = useState({
         firstName: '',
-        lastName: '',
         email: '',
         subject: '',
         message: ''
     });
+
+    useEffect(() => {
+        if (formStatus === 'success') {
+            const timer = setTimeout(() => {
+                setFormStatus('idle');
+            }, 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [formStatus]);
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, field: string) => {
         setFormData(prev => ({ ...prev, [field]: e.target.value }));
@@ -31,20 +88,16 @@ export default function ContactPage() {
         try {
             const { error } = await supabase
                 .from('form')
-                .insert([
-                    {
-                        firstname: formData.firstName,
-                        lastname: formData.lastName,
-                        email: formData.email,
-                        subject: formData.subject,
-                        message: formData.message
-                    }
-                ]);
+                .insert([{
+                    firstname: formData.firstName,
+                    email: formData.email,
+                    subject: formData.subject,
+                    message: formData.message
+                }]);
 
             if (error) throw error;
-
             setFormStatus('success');
-            setFormData({ firstName: '', lastName: '', email: '', subject: '', message: '' });
+            setFormData({ firstName: '', email: '', subject: '', message: '' });
         } catch (error) {
             console.error('Submission Error:', error);
             setFormStatus('error');
@@ -54,289 +107,181 @@ export default function ContactPage() {
     };
 
     return (
-        <main className="min-h-screen bg-[#EFE34B] selection:bg-[#121212] selection:text-white overflow-hidden">
+        <main className="min-h-screen bg-[#FFDE00] selection:bg-[#121212] selection:text-white overflow-x-hidden font-sans">
             <Navbar />
 
-            {/* Background Decorative Elements */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-white opacity-40 blur-[120px] rounded-full"></div>
-                <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-black opacity-[0.05] blur-[120px] rounded-full"></div>
-            </div>
-
-            {/* Hero Section */}
-            <div className="relative pt-32 pb-12 md:pt-48 md:pb-24 px-6 md:px-12 z-10">
-                <div className="max-w-[1440px] mx-auto">
-                    <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="text-center md:text-left"
-                    >
-                        <h1 className="text-5xl sm:text-7xl md:text-9xl font-black mb-6 text-[#121212] tracking-tighter leading-none">
-                            LET'S <span className="text-[#121212] opacity-40 italic font-medium">TALK.</span>
-                        </h1>
-                        <p className="text-black/70 text-lg md:text-xl max-w-2xl leading-relaxed font-bold">
-                            Have questions about our platform or want to see a live demo? 
-                            Our team is here to help you accelerate your business growth.
-                        </p>
-                    </motion.div>
-                </div>
-            </div>
-
-            {/* Main Content Section */}
-            <div className="relative pb-24 px-6 md:px-12 max-w-[1440px] mx-auto z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Content Container */}
+            <div className="relative pt-32 pb-16 px-4 md:px-12 max-w-[1440px] mx-auto z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-[45fr_55fr] gap-16 lg:gap-24 items-start">
                     
-                    {/* Left: Contact Info (4 cols) */}
-                    <div className="lg:col-span-4 space-y-6">
-                        <motion.div 
-                            initial={{ opacity: 0, x: -30 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="bg-white p-8 md:p-10 rounded-[40px] relative overflow-hidden group shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-white"
-                        >
-                            <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
-                                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#121212" strokeWidth="0.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                            </div>
-                            
-                            <h2 className="text-xs font-black mb-10 text-black uppercase tracking-[0.4em]">Connect With Us</h2>
-                            <div className="space-y-10 relative z-10">
-                                <ContactInfoItem 
-                                    title="Phone" 
-                                    value="+1 (555) 000-0000" 
-                                    icon={<PhoneIcon />}
-                                />
-                                <ContactInfoItem 
-                                    title="Email" 
-                                    value="hello@findlead.ai" 
-                                    icon={<EmailIcon />}
-                                />
-                                <ContactInfoItem 
-                                    title="Office" 
-                                    value="123 Innovation Way, Suite 100 SF, CA 94103" 
-                                    icon={<MapPinIcon />}
-                                />
-                            </div>
-
-                            <div className="mt-16 pt-10 border-t border-gray-100">
-                                <h3 className="text-[10px] font-black mb-6 text-black uppercase tracking-widest">Follow Our Journey</h3>
-                                <div className="flex gap-4">
-                                    <SocialLink icon={<LinkedinIcon />} name="LinkedIn" />
-                                    <SocialLink icon={<InstagramIcon />} name="Instagram" />
-                                    <SocialLink icon={<YoutubeIcon />} name="YouTube" />
+                    {/* Left Column */}
+                    <motion.div 
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="space-y-12 md:space-y-14 relative"
+                    >
+                        {/* Header Section */}
+                        <div className="space-y-8 relative z-10">
+                            <div className="flex justify-start">
+                                <div className="inline-flex items-center gap-2.5 bg-white px-4 py-2 rounded-full shadow-sm">
+                                    <IconPaperPlaneBadge />
+                                    <span className="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-[#121212]">We'd love to hear from you!</span>
                                 </div>
                             </div>
-                        </motion.div>
 
-                        <motion.div 
-                            initial={{ opacity: 0, x: -30 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
-                            className="bg-[#121212] p-8 rounded-[32px] text-white shadow-2xl"
-                        >
-                            <h4 className="font-black text-xl mb-2">Want a fast response?</h4>
-                            <p className="font-medium opacity-60 mb-6">Our average response time is under 2 hours during business hours.</p>
-                            <button className="flex items-center gap-2 font-black uppercase text-xs tracking-widest group text-[#EFE34B]">
-                                Start Live Chat 
-                                <span className="group-hover:translate-x-1 transition-transform">→</span>
-                            </button>
-                        </motion.div>
-                    </div>
+                            <div className="relative">
+                                <h1 className="text-[64px] sm:text-[72px] md:text-[96px] font-black text-[#121212] leading-[0.8] md:leading-[0.85] tracking-tighter">
+                                    Contact <br/>Us
+                                </h1>
+                                <motion.div 
+                                    className="absolute left-6 md:left-8 bottom-[-10px] md:bottom-[-15px] w-[130px] md:w-[170px] pointer-events-none"
+                                    animate={{ rotate: [-2, -1, -2], y: [0, -2, 0] }}
+                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                >
+                                    <svg viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto drop-shadow-sm">
+                                        <motion.path 
+                                            d="M10 35 C 40 30, 120 10, 190 5 M180 10 C 140 15, 60 25, 20 38 M30 35 C 70 30, 150 15, 195 10" 
+                                            stroke="white" 
+                                            strokeWidth="3" 
+                                            strokeLinecap="round" 
+                                            opacity="0.9"
+                                            initial={{ pathLength: 0 }}
+                                            animate={{ pathLength: 1 }}
+                                            transition={{ duration: 1.5, ease: "easeInOut", delay: 0.8 }}
+                                        />
+                                    </svg>
+                                </motion.div>
+                            </div>
 
-                    {/* Right: Contact Form (8 cols) */}
-                    <motion.div 
-                        initial={{ opacity: 0, x: 30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.3 }}
-                        className="lg:col-span-8 bg-white/90 backdrop-blur-xl border border-white rounded-[32px] md:rounded-[48px] p-6 sm:p-10 md:p-16 shadow-[0_30px_70px_rgba(0,0,0,0.08)] relative overflow-hidden"
+                            <div className="absolute right-[-10px] sm:right-[-20px] md:right-[20px] lg:right-[-120px] top-[140px] md:top-[220px] lg:top-[120px] w-[160px] sm:w-[200px] md:w-[280px] lg:w-[380px] pointer-events-none z-0">
+                                <motion.img 
+                                    src="/images/arrow-contact.png" 
+                                    alt="Paper plane decoration" 
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 1 }}
+                                    className="w-full h-auto"
+                                />
+                            </div>
+
+                            <p className="relative z-10 text-[#121212] text-lg md:text-xl font-bold max-w-sm leading-tight">
+                                Have a question, suggestion, or just want to say hello? We're here and happy to help you.
+                            </p>
+                        </div>
+
+                        {/* Contact Info Cards */}
+                        <div className="space-y-4 max-w-[420px] relative z-10">
+                            <ContactInfoCard title="Email Us" value="hello@yourbrand.com" icon={<IconEmail />} />
+                            <ContactInfoCard title="Call Us" value="+1 (234) 567-8900" icon={<IconPhone />} />
+                            <ContactInfoCard title="Visit Us" value="123 Yellow Street, Bright City, YC 12345" icon={<IconMap />} />
+                        </div>
+
+                        {/* Hand-drawn Footer */}
+                        <div className="pt-10 relative">
+                            <div className="absolute -top-8 -left-4 opacity-30">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#121212" strokeWidth="3"><line x1="12" y1="5" x2="12" y2="2"/><line x1="5" y1="12" x2="2" y2="12"/><line x1="19" y1="8" x2="21" y2="6"/></svg>
+                            </div>
+                            <span className="text-3xl md:text-4xl font-black italic text-[#121212] leading-none block tracking-tight">
+                                Let's create something amazing together!
+                            </span>
+                            <div className="absolute top-2 right-[-20px] md:right-[-30px]">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#121212" strokeWidth="3" className="rotate-12 opacity-40 md:opacity-50"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            </div>
+                            <div className="mt-4 ml-6 md:ml-12">
+                                <svg width="100" height="12" viewBox="0 0 120 12" fill="none" className="opacity-20 md:opacity-30">
+                                    <path d="M2 10 L 40 2 L 80 10 L 118 2" stroke="#121212" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Right Column */}
+                     <motion.div 
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="relative pt-8 lg:pt-10"
                     >
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#EFE34B] to-transparent"></div>
-                        
-                        <form onSubmit={handleSubmit} className="space-y-12 relative z-10">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                <FormGroup 
-                                    label="First Name" 
-                                    id="firstName"
-                                    value={formData.firstName}
-                                    onChange={(e) => handleInput(e, 'firstName')}
-                                    onFocus={() => setFocusedField('firstName')} 
-                                    onBlur={() => setFocusedField(null)}
-                                    isFocused={focusedField === 'firstName'}
-                                    required
-                                />
-                                <FormGroup 
-                                    label="Last Name" 
-                                    id="lastName"
-                                    value={formData.lastName}
-                                    onChange={(e) => handleInput(e, 'lastName')}
-                                    onFocus={() => setFocusedField('lastName')} 
-                                    onBlur={() => setFocusedField(null)}
-                                    isFocused={focusedField === 'lastName'}
-                                    required
-                                />
+                        <div className="bg-white rounded-[32px] md:rounded-[48px] p-8 md:p-12 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.1)] relative">
+                            <div className="absolute -top-10 left-1/2 -translate-x-1/2">
+                                <IconSpeechBubbleFloating />
                             </div>
-                            <FormGroup 
-                                label="Email Address" 
-                                type="email" 
-                                id="email"
-                                value={formData.email}
-                                onChange={(e) => handleInput(e, 'email')}
-                                onFocus={() => setFocusedField('email')} 
-                                onBlur={() => setFocusedField(null)}
-                                isFocused={focusedField === 'email'}
-                                required
-                            />
-                            <FormGroup 
-                                label="Subject" 
-                                id="subject"
-                                value={formData.subject}
-                                onChange={(e) => handleInput(e, 'subject')}
-                                onFocus={() => setFocusedField('subject')} 
-                                onBlur={() => setFocusedField(null)}
-                                isFocused={focusedField === 'subject'}
-                                required
-                            />
-                            <div className="group relative">
-                                <label className="absolute left-0 -top-6 text-[10px] font-black uppercase tracking-[0.2em] text-[#121212]">Message</label>
-                                <textarea 
-                                    rows={4} 
-                                    value={formData.message}
-                                    onChange={(e) => handleInput(e, 'message')}
-                                    onFocus={() => setFocusedField('message')}
-                                    onBlur={() => setFocusedField(null)}
-                                    className="w-full bg-transparent border-b border-gray-200 py-4 outline-none focus:border-[#121212] transition-all text-[#121212] placeholder-black/20 resize-none text-lg font-medium"
-                                    placeholder="Tell us about your project..."
-                                    required
-                                ></textarea>
+                            <div className="text-center mb-10 pt-8">
+                                <h2 className="text-2xl md:text-3xl font-black text-[#121212] tracking-tight mb-2">Send us a Message</h2>
+                                <p className="text-gray-400 font-bold text-sm">We usually reply within <span className="text-[#FFDE00] bg-[#121212] px-3 py-0.5 rounded-lg text-xs md:text-sm">24 hours.</span></p>
                             </div>
-                            
-                            <motion.button 
-                                type="submit"
-                                disabled={isSubmitting}
-                                whileHover={{ scale: 1.01, backgroundColor: '#000' }}
-                                whileTap={{ scale: 0.99 }}
-                                className={`w-full bg-[#121212] text-white py-6 rounded-[24px] font-black text-lg transition-colors shadow-2xl group flex items-center justify-center gap-4 uppercase tracking-[0.2em] ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
-                            >
-                                {isSubmitting ? 'Sending...' : 'Send Message'}
-                                <svg className="transition-transform group-hover:translate-x-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </motion.button>
+                            <form onSubmit={handleSubmit} className="space-y-5">
+                                <FormGroup label="Your Name" placeholder="Enter your name" icon={<IconUser />} value={formData.firstName} onChange={(e) => handleInput(e, 'firstName')} />
+                                <FormGroup label="Email Address" placeholder="Enter your email" type="email" icon={<IconEmail />} value={formData.email} onChange={(e) => handleInput(e, 'email')} />
+                                <FormGroup label="Subject" placeholder="What is this about?" icon={<IconTag />} value={formData.subject} onChange={(e) => handleInput(e, 'subject')} />
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#121212] ml-2">Your Message</label>
+                                    <div className="relative group">
+                                        <div className="absolute left-5 top-5">
+                                            <IconYellowCircle><IconPencil /></IconYellowCircle>
+                                        </div>
+                                        <textarea 
+                                            rows={5}
+                                            placeholder="Type your message here..."
+                                            value={formData.message}
+                                            onChange={(e) => handleInput(e, 'message')}
+                                            className="w-full bg-[#F8F8F8] border-none rounded-[28px] py-6 pl-20 pr-8 outline-none focus:ring-4 focus:ring-[#FFDE00]/30 text-[#121212] font-bold text-base placeholder:text-gray-300 resize-none transition-all"
+                                        ></textarea>
+                                    </div>
+                                </div>
 
-                            <AnimatePresence>
-                                {formStatus === 'success' && (
-                                    <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-center font-bold text-green-600">Message sent successfully!</motion.p>
-                                )}
-                                {formStatus === 'error' && (
-                                    <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-center font-bold text-red-600">There was an error sending your message. Please try again.</motion.p>
-                                )}
-                            </AnimatePresence>
-                        </form>
+                                <button type="submit" disabled={isSubmitting} className="w-full bg-[#121212] text-white py-5 rounded-[28px] flex items-center justify-between px-10 hover:bg-black transition-all group shadow-2xl active:scale-[0.98]">
+                                    <span className="text-lg font-black tracking-tight uppercase">Send Message</span>
+                                    <motion.div whileHover={{ rotate: 12 }}><IconPaperPlaneSubmit /></motion.div>
+                                </button>
+                            </form>
+                        </div>
                     </motion.div>
                 </div>
             </div>
-
-            {/* Global Presence Section - Reimagined */}
-            <section className="relative py-24 px-6 md:px-12 bg-transparent overflow-hidden">
-                <div className="max-w-[1440px] mx-auto">
-                    <motion.div 
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1 }}
-                        className="bg-white rounded-[32px] sm:rounded-[40px] md:rounded-[60px] min-h-[500px] md:min-h-[700px] overflow-hidden border border-white relative flex flex-col md:flex-row items-center p-6 sm:p-12 md:p-20 gap-10 md:gap-16 shadow-[0_40px_80px_rgba(0,0,0,0.06)]"
-                    >
-                        {/* Map Overlay */}
-                        <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply">
-                            <div className="absolute inset-0 bg-[#EFE34B]/20 blur-[150px] rounded-full"></div>
-                        </div>
-
-                        <div className="relative z-10 w-full md:w-1/3 text-center md:text-left">
-                            <h3 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#121212] uppercase mb-6 tracking-tighter leading-[0.9]">Global <br/><span className="text-[#121212] opacity-50">Presence</span></h3>
-                        </div>
-
-                        <div className="relative w-full md:w-2/3 aspect-square md:aspect-video flex items-center justify-center">
-                            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.6, duration: 1.2 }} className="relative w-full h-full">
-                                <Image src="/images/world-map.jpg" alt="World Map" fill className="object-contain opacity-80 grayscale contrast-125 rounded-3xl" />
-                                <svg className="absolute inset-0 w-full h-full z-10" viewBox="0 0 1000 500">
-                                    <motion.path d="M 215 170 Q 350 100 480 150" fill="none" stroke="#121212" strokeWidth="1" strokeDasharray="4 4" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.3 }} transition={{ delay: 1.2, duration: 1.5 }} />
-                                    <motion.path d="M 480 150 Q 615 200 750 220" fill="none" stroke="#121212" strokeWidth="1" strokeDasharray="4 4" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.3 }} transition={{ delay: 1.8, duration: 1.5 }} />
-                                </svg>
-                                <PulseHub x="21.5%" y="34%" name="San Francisco" delay={1} />
-                                <PulseHub x="48%" y="30%" name="London" delay={1.4} />
-                                <PulseHub x="75%" y="44%" name="Singapore" delay={1.8} />
-                                <PulseHub x="71%" y="39%" name="Mumbai" delay={2.2} />
-                                <PulseHub x="86%" y="71%" name="Sydney" delay={2.6} />
-                            </motion.div>
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-
             <Footer />
         </main>
     );
 }
 
-function ContactInfoItem({ title, value, icon }: { title: string, value: string, icon: React.ReactNode }) {
+function ContactInfoCard({ title, value, icon }: { title: string, value: string, icon: React.ReactNode }) {
     return (
-        <div className="flex items-center gap-6 group cursor-pointer">
-            <div className="w-14 h-14 bg-[#EFE34B] border border-[#EFE34B]/20 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-[#121212] group-hover:text-white transition-all duration-500 text-[#121212]">
-                {icon}
-            </div>
+        <div className="bg-white p-5 rounded-[28px] flex items-center gap-5 shadow-sm border border-white/20 group hover:shadow-lg transition-all duration-300">
+            <IconYellowCircle>{icon}</IconYellowCircle>
             <div>
-                <p className="text-[10px] font-black text-black/40 uppercase tracking-[0.2em] mb-1 group-hover:text-[#121212] transition-colors">{title}</p>
-                <p className="text-lg font-bold text-[#121212] tracking-tight group-hover:translate-x-1 transition-transform duration-500">{value}</p>
+                <h4 className="text-sm font-black text-[#121212] mb-0.5">{title}</h4>
+                <p className="text-sm font-medium text-gray-500">{value}</p>
             </div>
         </div>
     );
 }
 
-function FormGroup({ label, id, value, onChange, type = "text", onFocus, onBlur, isFocused, required }: { label: string, id: string, value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, type?: string, onFocus: () => void, onBlur: () => void, isFocused: boolean, required?: boolean }) {
+interface FormGroupProps {
+    label: string;
+    placeholder: string;
+    icon: React.ReactNode;
+    type?: string;
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+function FormGroup({ label, placeholder, icon, type = "text", value, onChange }: FormGroupProps) {
     return (
-        <div className="relative group">
-            <label className="absolute left-0 -top-6 text-[10px] font-black uppercase tracking-[0.2em] text-[#121212]">
-                {label}
-            </label>
-            <input 
-                type={type} 
-                value={value}
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                className="w-full bg-transparent border-b border-gray-200 py-4 outline-none focus:border-[#121212] transition-all text-[#121212] placeholder-black/20 text-lg font-medium" 
-                placeholder={`Your ${label}...`} 
-                required={required}
-            />
+        <div className="space-y-2">
+            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#121212] ml-2">{label}</label>
+            <div className="relative group">
+                <div className="absolute left-5 top-1/2 -translate-y-1/2">
+                    <IconYellowCircle>{icon}</IconYellowCircle>
+                </div>
+                <input 
+                    type={type} 
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                    className="w-full bg-[#F8F8F8] border-none rounded-[28px] py-6 pl-20 pr-8 outline-none focus:ring-4 focus:ring-[#FFDE00]/30 text-[#121212] font-bold text-base placeholder:text-gray-300 transition-all"
+                />
+            </div>
         </div>
     );
 }
-
-function SocialLink({ icon, name }: { icon: React.ReactNode, name: string }) {
-    return (
-        <a href="#" className="w-12 h-12 bg-gray-50 border border-gray-100 rounded-xl flex items-center justify-center text-[#121212] hover:bg-[#121212] hover:text-white transition-all duration-300 hover:-translate-y-1">
-            <span className="sr-only">{name}</span>
-            {icon}
-        </a>
-    );
-}
-
-function PulseHub({ x, y, name, delay }: { x: string, y: string, name: string, delay: number }) {
-    return (
-        <motion.div initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ delay, duration: 0.5, type: 'spring' }} className="absolute z-20" style={{ left: x, top: y }}>
-            <div className="relative flex items-center justify-center">
-                <span className="absolute w-10 h-10 bg-[#121212] rounded-full animate-ping opacity-10"></span>
-                <span className="absolute w-6 h-6 bg-[#121212] rounded-full opacity-10"></span>
-                <span className="relative w-3 h-3 bg-[#121212] rounded-full border-2 border-white shadow-lg"></span>
-                <motion.div initial={{ opacity: 0, y: 5 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: delay + 0.3 }} className="absolute top-10 whitespace-nowrap bg-[#121212] text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-2xl">
-                    {name}
-                </motion.div>
-            </div>
-        </motion.div>
-    );
-}
-
-const PhoneIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>;
-const EmailIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>;
-const MapPinIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>;
-const LinkedinIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>;
-const InstagramIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>;
-const YoutubeIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg>;
