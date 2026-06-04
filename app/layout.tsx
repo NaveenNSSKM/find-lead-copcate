@@ -11,9 +11,7 @@ const openSans = Open_Sans({
 export const metadata: Metadata = {
   title: "FindLead.ai - Hook Your Perfect 100",
   description: "Findlead uses a Strategic AI Agent to research high-intent leads and write handcrafted drips.",
-  icons: {
-    icon: '/images/favicon.png',
-  },
+ 
 };
 
 export default function RootLayout({
